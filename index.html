@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Barbearia Navalha Fina</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* VOICE: confiante, de bairro, direto — a barbearia clássica que o cliente já conhece
+   IDEA: a placa pintada à mão + o poste listrado da porta da barbearia
+   PICTURE: cadeira de barbeiro diante do espelho, com o poste girando ao lado
+   COLOUR and TYPE: carvão quente, creme e vermelho de poste; Alfa Slab One de letreiro + DM Sans
+   LAYOUT: nav, cena grande, tabela de preços como placa, agendamento numa coluna, equipe, horários, rodapé */
+:root{color-scheme:dark;--bg:#151210;--panel:#1f1a16;--line:#3a312a;--ink:#f3ead8;--mute:#b9ab95;--red:#d0202f;--blue:#2f5b8f;--cream:#f3ead8}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "DM Sans",system-ui,sans-serif;overflow-x:clip}
+a{color:inherit}
+h1,h2,.brand{font-family:"Alfa Slab One",Georgia,serif;font-weight:400;line-height:1.05;text-wrap:balance;margin:0}
+h1{font-size:clamp(36px,6vw,58px)}
+h2{font-size:clamp(28px,4vw,40px);margin-bottom:8px}
+.band{padding:clamp(36px,5vw,72px) max(5vw,16px)}
+.wrap{max-width:1180px;margin:0 auto}
+.lead{color:var(--mute);max-width:60ch;margin:0 0 28px}
+/* nav */
+nav{position:sticky;top:0;z-index:5;background:rgba(21,18,16,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;gap:16px;padding:12px max(5vw,16px);flex-wrap:wrap}
+.brand{font-size:20px;text-decoration:none;display:flex;align-items:center;gap:10px}
+.brand i{width:12px;height:30px;border-radius:6px;background:repeating-linear-gradient(145deg,var(--red) 0 6px,var(--cream) 6px 9px,var(--blue) 9px 15px,var(--cream) 15px 18px)}
+.links{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.links a{text-decoration:none;padding:10px 12px;border-radius:8px;color:var(--mute);font-weight:500}
+.links a:hover{color:var(--ink);background:var(--panel)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:10px;border:0;background:var(--red);color:#fff;font:700 16px "DM Sans",sans-serif;text-decoration:none;cursor:pointer}
+.btn:hover{filter:brightness(1.1)}
+.btn.ghost{background:transparent;border:2px solid var(--line);color:var(--ink)}
+:focus-visible{outline:3px solid var(--cream);outline-offset:2px}
+/* hero */
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(24px,4vw,56px);align-items:center}
+.hero p{font-size:18px;color:var(--mute);max-width:46ch;margin:18px 0 28px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.status{display:inline-flex;align-items:center;gap:8px;margin-bottom:18px;padding:6px 12px;border-radius:99px;background:var(--panel);border:1px solid var(--line);font-size:14px;color:var(--mute)}
+.status b{width:9px;height:9px;border-radius:50%;background:#777}
+.status.open b{background:#3fbf6f}
+.scene{width:100%;height:auto;display:block}
+.stripes{animation:pole 3.2s linear infinite}
+@keyframes pole{to{transform:translateY(73.2px)}}
+@media(prefers-reduced-motion:reduce){.stripes{animation:none}html{scroll-behavior:auto}}
+/* serviços */
+.menu{background:var(--cream);color:#1b1612}
+.menu .lead{color:#5a4d40}
+.board{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 48px}
+.item{display:flex;align-items:baseline;gap:10px;padding:16px 0;border-bottom:1px dashed #c9b99d}
+.item h3{margin:0;font-size:18px}
+.item small{display:block;color:#6d5f50;font-size:14px}
+.item .dots{flex:1}
+.item .price{font:400 22px "Alfa Slab One",serif;color:var(--red);white-space:nowrap}
+/* agendar */
+.book{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:start}
+form{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px;display:grid;gap:16px}
+label{display:grid;gap:6px;font-weight:500;font-size:15px}
+input,select{font:16px "DM Sans",sans-serif;min-height:48px;padding:0 14px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);width:100%}
+.row2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+.total{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line);padding-top:14px;color:var(--mute)}
+.total strong{font:400 26px "Alfa Slab One",serif;color:var(--ink)}
+.done{display:none;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px}
+.done.show{display:block}
+.done p{color:var(--mute)}
+.err{color:#ff8a8a;font-size:14px;min-height:1em;margin:0}
+.steps{list-style:none;padding:0;margin:0;display:grid;gap:18px}
+.steps li{display:flex;gap:14px}
+.steps span{flex:none;width:36px;height:36px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;font-weight:700}
+.steps p{margin:4px 0 0;color:var(--mute)}
+/* equipe */
+.team{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px}
+.card svg{width:72px;height:72px;margin-bottom:12px}
+.card h3{margin:0;font-size:19px}
+.card p{margin:4px 0 0;color:var(--mute);font-size:15px}
+/* info */
+.info{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.hours{list-style:none;padding:0;margin:0}
+.hours li{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line);gap:12px}
+.hours li.today{color:var(--cream);font-weight:700}
+.hours span:last-child{white-space:nowrap;color:var(--mute)}
+.hours li.today span:last-child{color:var(--cream)}
+.card a{color:var(--cream)}
+footer{border-top:1px solid var(--line);padding:28px max(5vw,16px);color:var(--mute);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.float{position:fixed;right:16px;bottom:16px;z-index:6;width:58px;height:58px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.float svg{width:30px;height:30px}
+@media(max-width:860px){.hero .wrap,.book{grid-template-columns:minmax(0,1fr)}.team,.info{grid-template-columns:minmax(0,1fr)}.board{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:600px){.links{order:3;width:100%;margin-left:0;overflow-x:auto;flex-wrap:nowrap}.links a{flex:none}nav .btn{margin-left:auto;min-height:44px;padding:0 16px}.row2{grid-template-columns:minmax(0,1fr)}}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <a class="brand" href="#topo"><i></i>Navalha Fina</a>
+  <div class="links"><a href="#servicos">Serviços</a><a href="#agendar">Agendar</a><a href="#equipe">Equipe</a><a href="#contato">Contato</a></div>
+  <a class="btn" href="#agendar">Agendar</a>
+</div></nav>
+
+<header class="band hero" id="topo"><div class="wrap">
+  <div>
+    <div class="status" id="status"><b></b><span id="statusTxt">Verificando horário…</span></div>
+    <h1>Corte de respeito, sem fila e sem enrolação.</h1>
+    <p>Degradê, barba na toalha quente e acabamento na navalha. Escolha o horário pelo site e confirme direto no WhatsApp.</p>
+    <div class="cta"><a class="btn" href="#agendar">Agendar meu horário</a><a class="btn ghost" href="#servicos">Ver preços</a></div>
+  </div>
+  <svg class="scene" viewBox="0 0 480 420" role="img" aria-label="Cadeira de barbeiro diante do espelho, com o poste listrado ao lado">
+    <defs>
+      <pattern id="pole" width="60" height="60" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">
+        <rect width="60" height="20" fill="#d0202f"/><rect y="20" width="60" height="10" fill="#f3ead8"/><rect y="30" width="60" height="20" fill="#2f5b8f"/><rect y="50" width="60" height="10" fill="#f3ead8"/>
+      </pattern>
+      <clipPath id="poleClip"><rect x="388" y="88" width="44" height="230" rx="22"/></clipPath>
+      <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3a3530"/><stop offset="1" stop-color="#211c18"/></linearGradient>
+      <linearGradient id="seat" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e0303f"/><stop offset="1" stop-color="#8e0f1b"/></linearGradient>
+      <linearGradient id="chrome" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7d756c"/><stop offset=".5" stop-color="#e9e2d6"/><stop offset="1" stop-color="#6b645c"/></linearGradient>
+      <radialGradient id="lamp" cx=".5" cy=".3" r=".7"><stop offset="0" stop-color="#f3ead8" stop-opacity=".22"/><stop offset="1" stop-color="#f3ead8" stop-opacity="0"/></radialGradient>
+    </defs>
+    <rect x="0" y="0" width="480" height="420" rx="24" fill="#1f1a16"/>
+    <ellipse cx="200" cy="140" rx="220" ry="170" fill="url(#lamp)"/>
+    <!-- piso -->
+    <path d="M0 330 H480 V396 a24 24 0 0 1 -24 24 H24 a24 24 0 0 1 -24 -24Z" fill="#2a231d"/>
+    <path d="M0 330 H480" stroke="#3a312a" stroke-width="2"/>
+    <!-- espelho -->
+    <rect x="70" y="40" width="250" height="190" rx="14" fill="#c9b99d"/>
+    <rect x="80" y="50" width="230" height="170" rx="8" fill="url(#glass)"/>
+    <path d="M110 50 L170 50 L100 220 L80 220 L80 120Z" fill="#f3ead8" opacity=".06"/>
+    <path d="M200 50 L222 50 L152 220 L130 220Z" fill="#f3ead8" opacity=".05"/>
+    <!-- bancada -->
+    <rect x="50" y="236" width="290" height="14" rx="4" fill="#5a4535"/>
+    <rect x="62" y="250" width="266" height="6" fill="#3d2f24"/>
+    <rect x="84" y="214" width="16" height="22" rx="3" fill="#d0202f"/><rect x="87" y="208" width="10" height="7" rx="2" fill="#e9e2d6"/>
+    <rect x="108" y="220" width="12" height="16" rx="3" fill="#2f5b8f"/>
+    <g transform="translate(272 214)" fill="none" stroke="#e9e2d6" stroke-width="3"><circle cx="0" cy="12" r="6"/><circle cx="18" cy="12" r="6"/><path d="M4 7 L26 -12 M14 7 L-8 -12"/></g>
+    <!-- sombra da cadeira -->
+    <ellipse cx="200" cy="378" rx="120" ry="14" fill="#0e0b09" opacity=".6"/>
+    <!-- base cromada -->
+    <ellipse cx="200" cy="370" rx="78" ry="10" fill="url(#chrome)"/>
+    <rect x="186" y="316" width="28" height="54" fill="url(#chrome)"/>
+    <!-- encosto de pé -->
+    <rect x="120" y="330" width="70" height="8" rx="4" fill="url(#chrome)"/>
+    <!-- assento -->
+    <rect x="118" y="276" width="168" height="44" rx="14" fill="url(#seat)"/>
+    <rect x="128" y="280" width="148" height="6" rx="3" fill="#ff6b77" opacity=".35"/>
+    <!-- encosto -->
+    <rect x="214" y="168" width="64" height="120" rx="16" fill="url(#seat)"/>
+    <rect x="220" y="174" width="8" height="104" rx="4" fill="#ff6b77" opacity=".3"/>
+    <!-- apoio de cabeça -->
+    <rect x="226" y="134" width="44" height="26" rx="10" fill="url(#seat)"/>
+    <rect x="244" y="158" width="8" height="12" fill="url(#chrome)"/>
+    <!-- braços -->
+    <rect x="128" y="256" width="120" height="14" rx="7" fill="url(#chrome)"/>
+    <rect x="138" y="268" width="8" height="12" fill="#6b645c"/>
+    <!-- poste -->
+    <rect x="384" y="70" width="52" height="20" rx="6" fill="url(#chrome)"/>
+    <rect x="384" y="316" width="52" height="20" rx="6" fill="url(#chrome)"/>
+    <g clip-path="url(#poleClip)"><g class="stripes"><rect x="380" y="0" width="60" height="400" fill="url(#pole)"/></g></g>
+    <rect x="388" y="88" width="44" height="230" rx="22" fill="none" stroke="#f3ead8" stroke-opacity=".35" stroke-width="2"/>
+    <rect x="396" y="96" width="8" height="214" rx="4" fill="#fff" opacity=".25"/>
+    <circle cx="410" cy="62" r="10" fill="url(#chrome)"/>
+  </svg>
+</div></header>
+
+<section class="band menu" id="servicos"><div class="wrap">
+  <h2>Serviços e preços</h2>
+  <p class="lead">Preço fechado, sem surpresa no caixa. Pagamento em Pix, cartão ou dinheiro.</p>
+  <div class="board" id="board"></div>
+</div></section>
+
+<section class="band" id="agendar"><div class="wrap book">
+  <div>
+    <h2>Agende em 30 segundos</h2>
+    <p class="lead">Escolha o serviço, o dia e o horário. A mensagem já vai pronta para o nosso WhatsApp, é só enviar.</p>
+    <ol class="steps">
+      <li><span>1</span><div><strong>Escolha o serviço</strong><p>O valor aparece na hora.</p></div></li>
+      <li><span>2</span><div><strong>Marque dia e horário</strong><p>Atendemos de terça a sábado.</p></div></li>
+      <li><span>3</span><div><strong>Confirme no WhatsApp</strong><p>Respondemos em poucos minutos.</p></div></li>
+    </ol>
+  </div>
+  <div>
+    <form id="form" novalidate>
+      <label>Seu nome<input id="nome" autocomplete="given-name" placeholder="Ex.: Lucas"></label>
+      <label>Serviço<select id="servico"></select></label>
+      <label>Barbeiro<select id="barbeiro"><option>Sem preferência</option></select></label>
+      <div class="row2">
+        <label>Dia<input id="dia" type="date"></label>
+        <label>Horário<select id="hora"></select></label>
+      </div>
+      <div class="total"><span>Total</span><strong id="total">R$ 0</strong></div>
+      <p class="err" id="err"></p>
+      <button class="btn" type="submit">Continuar no WhatsApp</button>
+    </form>
+    <div class="done" id="done">
+      <h2>Quase lá!</h2>
+      <p id="resumo"></p>
+      <div class="cta"><a class="btn" id="wa" href="#">Enviar no WhatsApp</a><button class="btn ghost" id="voltar" type="button">Alterar</button></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="band" id="equipe" style="padding-top:0"><div class="wrap">
+  <h2>Quem vai cuidar de você</h2>
+  <p class="lead">Barbeiros com anos de cadeira, cada um com a sua especialidade.</p>
+  <div class="team" id="team"></div>
+</div></section>
+
+<section class="band" id="contato" style="padding-top:0"><div class="wrap">
+  <h2>Onde estamos</h2>
+  <p class="lead">Estacionamento na rua e café por conta da casa enquanto você espera.</p>
+  <div class="info">
+    <div class="card"><h3>Horários</h3><ul class="hours" id="hours"></ul></div>
+    <div class="card"><h3>Endereço</h3><p>Rua das Palmeiras, 245, Centro</p><p style="margin-top:14px"><a href="https://www.google.com/maps/search/?api=1&query=Rua+das+Palmeiras+245+Centro">Abrir no Google Maps</a></p></div>
+    <div class="card"><h3>Contato</h3><p>WhatsApp: (11) 99999-9999</p><p>Instagram: @navalhafina</p><p style="margin-top:14px"><a href="https://wa.me/5511999999999">Chamar no WhatsApp</a></p></div>
+  </div>
+</div></section>
+
+<footer><div class="wrap"><span>© Barbearia Navalha Fina</span><span>Site de demonstração: nome, endereço e contatos são exemplos.</span></div></footer>
+
+<a class="float" href="https://wa.me/5511999999999" aria-label="Chamar no WhatsApp"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.2c0-.1-.2-.2-.4-.3Z"/></svg></a>
+
+<script>
+{
+const WHATS = '5511999999999';
+const servicos = [
+  {n:'Corte masculino', d:'Tesoura ou máquina, com lavagem', p:45},
+  {n:'Barba completa', d:'Toalha quente e navalha', p:35},
+  {n:'Corte + barba', d:'O combo mais pedido', p:70},
+  {n:'Degradê / fade', d:'Navalhado, acabamento no detalhe', p:50},
+  {n:'Pezinho e acabamento', d:'Entre um corte e outro', p:15},
+  {n:'Sobrancelha', d:'Na navalha ou na pinça', p:20},
+  {n:'Pigmentação de barba', d:'Preenche falhas, dura até 7 dias', p:30},
+  {n:'Platinado / luzes', d:'Inclui tonalização', p:150}
+];
+const equipe = [
+  {n:'Rafael Souza', r:'Fundador · degradê e navalhado', c:'#d0202f'},
+  {n:'Diego Lima', r:'Barba e pigmentação', c:'#2f5b8f'},
+  {n:'Mateus Rocha', r:'Platinado e cortes modernos', c:'#8a6a3d'}
+];
+const horarios = [[0,'Domingo',null],[1,'Segunda',null],[2,'Terça',[9,20]],[3,'Quarta',[9,20]],[4,'Quinta',[9,20]],[5,'Sexta',[9,20]],[6,'Sábado',[8,18]]];
+const brl = v => 'R$ ' + v.toLocaleString('pt-BR');
+const $ = id => document.getElementById(id);
+
+$('board').innerHTML = servicos.map(s => `<div class="item"><div><h3>${s.n}</h3><small>${s.d}</small></div><span class="dots"></span><span class="price">${brl(s.p)}</span></div>`).join('');
+$('servico').innerHTML = servicos.map((s,i) => `<option value="${i}">${s.n} (${brl(s.p)})</option>`).join('');
+$('barbeiro').innerHTML += equipe.map(e => `<option>${e.n}</option>`).join('');
+$('team').innerHTML = equipe.map(e => {
+  const ini = e.n.split(' ').map(w => w[0]).join('');
+  return `<div class="card"><svg viewBox="0 0 72 72" aria-hidden="true"><circle cx="36" cy="36" r="36" fill="${e.c}"/><text x="36" y="45" text-anchor="middle" font-family="Alfa Slab One, serif" font-size="26" fill="#f3ead8">${ini}</text></svg><h3>${e.n}</h3><p>${e.r}</p></div>`;
+}).join('');
+
+const now = new Date();
+const today = now.getDay();
+$('hours').innerHTML = [2,3,4,5,6,0,1].map(i => {
+  const h = horarios[i];
+  return `<li class="${i===today?'today':''}"><span>${h[1]}${i===today?' (hoje)':''}</span><span>${h[2]?h[2][0]+'h às '+h[2][1]+'h':'Fechado'}</span></li>`;
+}).join('');
+const ht = horarios[today][2];
+const hr = now.getHours() + now.getMinutes()/60;
+const aberto = ht && hr >= ht[0] && hr < ht[1];
+$('status').classList.toggle('open', !!aberto);
+$('statusTxt').textContent = aberto ? `Aberto agora · até ${ht[1]}h` : 'Fechado agora · agende para o próximo dia';
+
+const pad = n => String(n).padStart(2,'0');
+const iso = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const dia = $('dia');
+dia.min = iso(now);
+const prox = new Date(now);
+while (!horarios[prox.getDay()][2] || (prox.toDateString()===now.toDateString() && !aberto)) prox.setDate(prox.getDate()+1);
+dia.value = iso(prox);
+
+function fillHoras(){
+  const d = new Date(dia.value + 'T12:00');
+  const h = horarios[d.getDay()][2];
+  const sel = $('hora');
+  if (!h){ sel.innerHTML = '<option value="">Fechado neste dia</option>'; return; }
+  const opts = [];
+  for (let t = h[0]; t < h[1]; t += .5){
+    if (dia.value === iso(now) && t <= hr) continue;
+    opts.push(`${pad(Math.floor(t))}:${t%1?'30':'00'}`);
+  }
+  sel.innerHTML = opts.length ? opts.map(o => `<option>${o}</option>`).join('') : '<option value="">Sem horários hoje</option>';
+}
+function fillTotal(){ $('total').textContent = brl(servicos[$('servico').value].p); }
+dia.addEventListener('change', fillHoras);
+$('servico').addEventListener('change', fillTotal);
+fillHoras(); fillTotal();
+
+$('form').addEventListener('submit', e => {
+  e.preventDefault();
+  const nome = $('nome').value.trim();
+  const hora = $('hora').value;
+  if (!nome){ $('err').textContent = 'Digite seu nome.'; $('nome').focus(); return; }
+  if (!dia.value || !hora){ $('err').textContent = 'Escolha um dia e um horário disponíveis.'; return; }
+  $('err').textContent = '';
+  const s = servicos[$('servico').value];
+  const b = $('barbeiro').value;
+  const data = new Date(dia.value + 'T12:00').toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'2-digit'});
+  const msg = `Olá! Sou ${nome} e quero agendar: ${s.n} (${brl(s.p)}) na ${data} às ${hora}` + (b !== 'Sem preferência' ? ` com ${b}.` : '.');
+  $('resumo').textContent = msg;
+  $('wa').href = `https://wa.me/${WHATS}?text=${encodeURIComponent(msg)}`;
+  $('form').style.display = 'none';
+  $('done').classList.add('show');
+});
+$('voltar').addEventListener('click', () => { $('done').classList.remove('show'); $('form').style.display = ''; });
+}
+</script>
+</body>
+</html>
